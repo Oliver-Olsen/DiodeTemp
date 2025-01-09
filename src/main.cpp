@@ -72,12 +72,12 @@ void loop() {
 
 
 void lights(float temp){
-  if (temp > HOTTEMP){
+  if (temp >= HOTTEMP){
     digitalWrite(REDPIN, HIGH);
     digitalWrite(YELLOWPIN, LOW);
     digitalWrite(GREENPIN, LOW);
   }
-  else if (temp < COLDTEMP){
+  else if (temp <= COLDTEMP){
     digitalWrite(REDPIN, LOW);    
     digitalWrite(YELLOWPIN, LOW);    
     digitalWrite(GREENPIN, HIGH); 
