@@ -23,7 +23,7 @@ float tempMeasured = 0;
 
 
 float voltConvert(int analogInput);
-void lights(int temp);
+void lights(float temp);
 
 void setup() {
   Serial.begin(9600);
@@ -48,6 +48,8 @@ void loop() {
   Serial.write(u8"\u00B0");
   Serial.println("C");
 
+  lights(tempMeasured);
+
   // Delay added to reduce number print-outs
   // The sensor can output data once per second
   delay(1000);
@@ -69,26 +71,20 @@ void loop() {
 
 
 
-void lights(int temp){
-  switch (temp)
-  {
-  case (temp > HOTTEMP):
+void lights(float temp){
+  if (temp > HOTTEMP){
     digitalWrite(REDPIN, HIGH);
     digitalWrite(YELLOWPIN, LOW);
     digitalWrite(GREENPIN, LOW);
-    break;
-
-  case (temp < COLDTEMP):
+  }
+  else if (temp < COLDTEMP){
     digitalWrite(REDPIN, LOW);    
     digitalWrite(YELLOWPIN, LOW);    
     digitalWrite(GREENPIN, HIGH); 
-    break;   
-
-  
-  default:
+  }
+  else {
     digitalWrite(REDPIN, LOW);    
     digitalWrite(YELLOWPIN, HIGH);    
-    digitalWrite(GREENPIN, LOW); 
-    break;
+    digitalWrite(GREENPIN, LOW);
   }
 }
