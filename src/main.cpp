@@ -23,6 +23,7 @@ float tempMeasured = 0;
 
 
 float voltConvert(int analogInput);
+void lights(int temp);
 
 void setup() {
   Serial.begin(9600);
